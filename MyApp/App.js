@@ -1,13 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet,Image, Text,TextInput, View, SafeAreaView, TouchableOpacity, ScrollView, FlatList} from 'react-native';
 import { categoriesData } from "./MData/categories.data";
-
+import { taskData } from "./MData/task.data";
+import Icon from 'react-native-vector-icons/FontAwesome';
 export default function App() {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fceeeb'}}>
-      <ScrollView>
-        <View style={styles.container}>
-
+      <View style={styles.container}>
           {/**First Component */}
           <View style={firs1.firstCompo}>
 
@@ -21,14 +20,19 @@ export default function App() {
             <TouchableOpacity style={{backgroundColor:'#fff', padding: 6.5, borderRadius: 30,}}>
                 <Image source={require("./Assets/profile.png")}></Image>
             </TouchableOpacity>
-
           </View>
           {/**End of First Component */}
 
           {/**Second Component */}  
           <View style={sec2.secondCompo}>
             {/**TextInput Box  */}
-            <TextInput placeholder="Search" style={searchInput.searchHere}/>
+              <TouchableOpacity>
+                <Icon  style={{fontSize: 20,   borderRadius: 35, padding: 5,  display: 'flex',
+    alignItems: 'flex',
+    backgroundColor: "white",}} name='search'/>
+              </TouchableOpacity>
+              <TextInput style={searchInput.searchHere} placeholder="Search"/>
+            
       
             {/**Search Icon and FIlter Icon */}
             <View style={{backgroundColor: "#F0522F", padding: 10, borderRadius: 10}}>
@@ -39,7 +43,7 @@ export default function App() {
           {/**End of Second Component */}
 
           {/**Third Component */} 
-          <View style={{gap: 10, width: 380, height: 235, left: 2, top: 42, }}>
+          <View style={{gap: 10, width: 380, height: 235, top: 42, }}>
             <Text style={{fontSize: 20, fontWeight: "bold", left: 2,}}>Categories</Text>
 
             <FlatList style={{top: 40, left: 2, width: 380, top: 0.7, height: 192,}}
@@ -63,12 +67,32 @@ export default function App() {
               horizontal
               showsHorizontalScrollIndicator={false}
             />
-            {/**End of Third Component */}
-            
-            <StatusBar style="auto" />
           </View>
-        </View>
-      </ScrollView>
+            {/**End of Third Component */}
+
+          
+          {/**Fourth Component */}
+          {/**Ongoing Tasks */}
+          <View style={{ gap: 10, width: 380, top: 40, height: 450,}}>
+            <Text style={{fontWeight: "bold", fontSize: 20}}>Ongoing Task</Text>
+              <FlatList style={{top: 40, width: 380, top: 0.7, height: 320,}}
+                data={taskData}
+                renderItem={({ item }) => (
+                  <View style={flatListTask.flatLists}>
+                    <View>
+                      <Text style={{fontWeight: 700, fontSize: 16 }} >
+                        {item.name}
+                      </Text>
+                    </View>
+                  </View>
+                  )}
+                  keyExtractor={(item) => item.id}
+                  showsVerticalScrollIndicator={false}
+              />
+          </View>
+          {/**End of Fourth Component */}
+          <StatusBar style="auto" />
+      </View>
     </SafeAreaView>
   );
 }
@@ -116,12 +140,14 @@ const sec2 = StyleSheet.create({
 {/** SearchInput Area */}
 const searchInput = StyleSheet.create({
   searchHere: {
+    display: 'flex',
+    alignItems: 'flex',
     backgroundColor: "white",
-    width: 300,
+    width: 285,
     height: 48,
     borderRadius: 10,
     padding: 5,
-    border: 1,
+    right: 4.5,
   }
 })
 
@@ -131,8 +157,21 @@ const flatlistcategories =({
   display: "flex", 
   backgroundColor: "white", 
   marginRight: 14, 
-  borderRadius: 20, 
+  borderRadius: 15, 
   width: 186,
   height: 195,
+  }
+})
+
+const flatListTask =({
+  flatLists: {
+    height: 128, 
+    backgroundColor: "white", 
+    borderColor: "#E8D1BA", 
+    padding: 20, 
+    borderRadius: 15, 
+    marginBottom: 12, 
+    justifyContent: "center",
+    border: 1,
   }
 })

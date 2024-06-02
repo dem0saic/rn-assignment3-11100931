@@ -19,6 +19,30 @@ export const categoriesData = [
   },
   {
     id: 3,
+    name: "Finance",
+    description: "12 Task",
+    image: require("../Assets/student1.png"),
+  },
+  {
+    id: 4,
+    name: "Chores",
+    description: "12 Task",
+    image: require("../Assets/student1.png"),
+  },
+  {
+    id: 5,
+    name: "Creative",
+    description: "12 Task",
+    image: require("../Assets/student1.png"),
+  },
+  {
+    id: 6,
+    name: "Self-Care",
+    description: "12 Task",
+    image: require("../Assets/student1.png"),
+  },
+  {
+    id: 7,
     name: "Cook",
     description: "12 Task",
     image: require("../Assets/student1.png"),
