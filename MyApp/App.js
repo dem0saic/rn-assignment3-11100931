@@ -1,40 +1,74 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet,Image, Text,TextInput, View, SafeAreaView, TouchableOpacity } from 'react-native';
-
+import { StyleSheet,Image, Text,TextInput, View, SafeAreaView, TouchableOpacity, ScrollView, FlatList} from 'react-native';
+import { categoriesData } from "./MData/categories.data";
 
 export default function App() {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fceeeb'}}>
-      <View style={styles.container}>
+      <ScrollView>
+        <View style={styles.container}>
 
-        {/**First Component */}
-        <View style={firs1.firstCompo}>
-          <View style={{}}>
-            <Text style={{fontSize: 32, fontWidth: 'bold', font: ''}}>Hello, Devs</Text>
-            <Text style={{fontSize: 12}}>14 Tasks Today</Text>
+          {/**First Component */}
+          <View style={firs1.firstCompo}>
+
+            <View style={{}}>
+              <Text style={{fontSize: 32, fontWidth: 'bold', font: ''}}>Hello, Devs</Text>
+              <Text style={{fontSize: 12}}>14 Tasks Today</Text>
+            </View>
+            {/**Bell Icon */}
+
+            {/**Profile Picture */} 
+            <TouchableOpacity style={{backgroundColor:'#fff', padding: 6.5, borderRadius: 30,}}>
+                <Image source={require("./Assets/profile.png")}></Image>
+            </TouchableOpacity>
+
           </View>
+          {/**End of First Component */}
 
-          <TouchableOpacity style={{backgroundColor:'#fff', padding: 6.5, borderRadius: 30,}}>
-              <Image source={require("./assets/profile.png")}></Image>
-          </TouchableOpacity>
-        </View>
+          {/**Second Component */}  
+          <View style={sec2.secondCompo}>
+            {/**TextInput Box  */}
+            <TextInput placeholder="Search" style={searchInput.searchHere}/>
+      
+            {/**Search Icon and FIlter Icon */}
+            <View style={{backgroundColor: "#F0522F", padding: 10, borderRadius: 10}}>
+              <Image source={require("./Assets/setting.png")} />
+            </View>
 
-        {/**Second Component */}  
-        <View style={sec2.secondCompo}>
-          {/**TextInput Box  */}
-          <TextInput placeholder="Search" style={searchInput.searchHere}/>
-    
-          {/**Search Icon and FIlter Icon */}
-          <View style={{backgroundColor: "#F0522F", padding: 10, borderRadius: 10}}>
-            <Image source={require("./assets/Vector.png")} />
+          </View>
+          {/**End of Second Component */}
+
+          {/**Third Component */} 
+          <View style={{gap: 10, width: 380, height: 235, left: 2, top: 42, }}>
+            <Text style={{fontSize: 20, fontWeight: "bold", left: 2,}}>Categories</Text>
+
+            <FlatList style={{top: 40, left: 2, width: 380, top: 0.7, height: 192,}}
+              data={categoriesData}
+
+              renderItem={({ item }) => (
+                <View style={flatlistcategories.flatlists}>
+
+                  <View style={{width: 72, height: 37, top: 10, left: 15,}}>
+                    <Text style={{fontWeight: "bold", fontSize: 16,}}>
+                      {item.name}
+                    </Text>
+                    <Text style={{fontSize: 12,}}>{item.description}</Text>
+                  </View>
+                  <View style={{alignItems: 'center', width: 151, height: 132,top: 18,left: 18,}}>
+                  <Image source={item.image} />
+                  </View>
+                </View>
+              )}
+              keyExtractor={(item) => item.id}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
+            {/**End of Third Component */}
+            
+            <StatusBar style="auto" />
           </View>
         </View>
-
-        <View style={{gap: 10,}}>
-          <Text style={{fontSize: 20, fontWeight: "bold", top: 55,}}>Categories</Text>
-        </View>
-          <StatusBar style="auto" />
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -57,8 +91,8 @@ const firs1 = StyleSheet.create({
     alignItems: "center", 
     justifyContent: "space-between",
     width: 380,
-    height: 52,
-    top: 42,
+    height: 46,
+    top: 40,
     gap: 134,
     left: 2,
   }
@@ -72,8 +106,8 @@ const sec2 = StyleSheet.create({
     alignItems: "center", 
     justifyContent: "space-between",
     width: 380,
-    height: 49,
-    top: 55,
+    height: 52,
+    top: 48,
     left: 2,
     border: 1,
   }
@@ -88,5 +122,17 @@ const searchInput = StyleSheet.create({
     borderRadius: 10,
     padding: 5,
     border: 1,
+  }
+})
+
+{/**Third component */}
+const flatlistcategories =({
+  flatlists: {
+  display: "flex", 
+  backgroundColor: "white", 
+  marginRight: 14, 
+  borderRadius: 20, 
+  width: 186,
+  height: 195,
   }
 })
